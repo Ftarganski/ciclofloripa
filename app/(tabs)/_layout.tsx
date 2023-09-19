@@ -25,10 +25,12 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
+          title: 'Home',
+
+          //MODAL
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/about" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -41,12 +43,21 @@ export default function TabLayout() {
               </Pressable>
             </Link>
           ),
+
+
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="register"
         options={{
-          title: 'Tab Two',
+          title: 'Cadastro',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Perfil',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
