@@ -11,6 +11,7 @@ import {
 import * as Location from "expo-location";
 import * as ImagePicker from "expo-image-picker";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { FontAwesome } from "@expo/vector-icons";
 
 type ComplainScreenProps = {
   navigation: StackNavigationProp<any>;
@@ -62,21 +63,20 @@ export default function ComplainScreen({ navigation }: ComplainScreenProps) {
     console.log("Foto:", photo);
     console.log("Localização:", location);
     console.log("Resumo do Problema:", problemSummary);
-
-    // Depois de enviar os dados, você pode navegar para a próxima tela, se necessário
-    // navigation.navigate('TelaSeguinte');
+    setTimeout(() => {
+      setIsComplaintSent(true);
+    }, 1000); // Defina um tempo limite de 1 segundo para simular o envio
   };
+
+  const [isComplaintSent, setIsComplaintSent] = useState(false);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Ocorrência</Text>
+      <Text style={styles.title}>Registro de Ocorrência</Text>
       {photo && <Image source={{ uri: photo }} style={styles.photo} />}
-      {location && (
-        <Text style={styles.locationText}>
-          Localização: {location.latitude}, {location.longitude}
-        </Text>
-      )}
-      <Button title="Tirar Foto e Obter Localização" onPress={handleTakePhoto} />
+      <TouchableOpacity onPress={handleTakePhoto}>
+        <FontAwesome name="camera" size={30} color="gray" />
+      </TouchableOpacity>
       <TextInput
         style={styles.input}
         placeholder="Resumo do Problema"
@@ -84,7 +84,16 @@ export default function ComplainScreen({ navigation }: ComplainScreenProps) {
         onChangeText={(text) => setProblemSummary(text)}
         multiline
       />
+      {location && (
+        <Text style={styles.locationText}>
+          Localização: {location.latitude}, {location.longitude}
+        </Text>
+      )}
+
       <Button title="Enviar" onPress={handleSendComplaint} />
+      {isComplaintSent && (
+        <Text style={styles.successMessage}>Mensagem enviada com sucesso!</Text>
+      )}
     </View>
   );
 }
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "80%",
-    height: 100,
+    height: 200,
     borderWidth: 1,
     borderColor: "gray",
     borderRadius: 8,
@@ -117,7 +126,21 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   locationText: {
-    fontSize: 16,
+    width: "80%",
+    height: 40,
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 16,
+    backgroundColor: "white",
+    // fontSize: 16,
+    // marginBottom: 16,
+  },
+  successMessage: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#2f95dc",
     marginBottom: 16,
   },
 });

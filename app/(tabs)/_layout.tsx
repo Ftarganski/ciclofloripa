@@ -21,6 +21,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        // tabBarStyle: { display: "none" }
       }}
     >
       <Tabs.Screen
@@ -63,16 +64,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="register"
         options={{
-          title: "Cadastro",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="user-plus" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Perfil",
+          title: "Usuário",
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
