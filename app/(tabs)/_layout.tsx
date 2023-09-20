@@ -62,6 +62,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="partners"
+        options={{
+          title: "Parceiros",
+          tabBarIcon: ({ color }) => <TabBarIcon name="tags" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="register"
         options={{
           title: "Usuário",

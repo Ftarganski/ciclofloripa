@@ -67,16 +67,16 @@ export default function RegisterScreen({ navigation }: RegisterScreenProps) {
     <View style={styles.container}>
       <Text style={styles.title}>Ciclista</Text>
       <View style={styles.imageContainer}>
-        <Image
-          source={
-            photo
-              ? { uri: photo }
-              : require("../../assets/images/noUserPhoto.png")
-          }
-          style={styles.photo}
-        />
         <TouchableOpacity onPress={handlePickImage}>
-          <FontAwesome name="camera" size={30} color="gray" />{" "}
+          <Image
+            source={
+              photo
+                ? { uri: photo }
+                : require("../../assets/images/noUserPhoto.png")
+            }
+            style={styles.photo}
+          />
+          <FontAwesome name="camera" size={30} color="gray" />
         </TouchableOpacity>
       </View>
       <TextInput
