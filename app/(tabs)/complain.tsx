@@ -73,23 +73,32 @@ export default function ComplainScreen({ navigation }: ComplainScreenProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registro de Ocorrência</Text>
-      {photo && <Image source={{ uri: photo }} style={styles.photo} />}
+      <Image
+        source={
+          photo
+            ? { uri: photo }
+            : require("../../assets/images/noImageComplain.png")
+        }
+        style={styles.photo}
+      />
       <TouchableOpacity onPress={handleTakePhoto}>
-        <FontAwesome name="camera" size={30} color="gray" />
+        <FontAwesome style={styles.icon} name="camera" size={30} color="gray" />
       </TouchableOpacity>
       <TextInput
-        style={styles.input}
-        placeholder="Resumo do Problema"
+        style={styles.inputMessage}
+        placeholder="Digite aqui um breve resumo do problema..."
         value={problemSummary}
         onChangeText={(text) => setProblemSummary(text)}
         multiline
       />
-      {location && (
-        <Text style={styles.locationText}>
-          Localização: {location.latitude}, {location.longitude}
-        </Text>
-      )}
-
+      <Text style={styles.text}>Localização:</Text>
+      <Text style={styles.inputCenter}>
+        {location && (
+          <>
+            {location.latitude}, {location.longitude}{" "}
+          </>
+        )}
+      </Text>
       <Button title="Enviar" onPress={handleSendComplaint} />
       {isComplaintSent && (
         <Text style={styles.successMessage}>Mensagem enviada com sucesso!</Text>
@@ -110,32 +119,39 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
   },
-  input: {
+  icon: {
+    marginBottom: 16,
+  },
+  inputMessage: {
     width: "80%",
     height: 200,
-    borderWidth: 1,
-    borderColor: "gray",
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 16,
     backgroundColor: "white",
   },
-  photo: {
-    width: 200,
-    height: 150,
-    marginBottom: 16,
-  },
-  locationText: {
+  inputCenter: {
+    fontWeight: "bold",
     width: "80%",
     height: 40,
-    borderWidth: 1,
-    borderColor: "gray",
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 16,
     backgroundColor: "white",
-    // fontSize: 16,
-    // marginBottom: 16,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  photo: {
+    width: "80%",
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 30,
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 8,
   },
   successMessage: {
     fontSize: 22,
